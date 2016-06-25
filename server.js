@@ -3,6 +3,8 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
+var table_data = require('./app/data/table-data.js');
+var waiting_list = require('./app/data/waitinglist-data.js');
 
 // Sets up the Express App
 // =============================================================
@@ -66,29 +68,31 @@ app.get('/reserve', function(req, res){
 
 
 // Search for Specific Character (or all characters) - provides JSON
-/* app.get('/api/:characters?', function(req, res){
+app.get('/data', function(req, res){
 
-	var chosen = req.params.characters;
+	// var chosen = req.params.characters;
 
-	if(chosen){
-		console.log(chosen);
+	// if(chosen){
+	// 	console.log(chosen);
 
-		for (var i=0; i <characters.length; i++){
+	// 	for (var i=0; i <characters.length; i++){
 
-			if (chosen == characters[i].routeName){
-				res.json(characters[i]);
-				return;
-			}
-		}
+	// 		if (chosen == characters[i].routeName){
+	// 			res.json(characters[i]);
+	// 			return;
+	// 		}
+	// 	}
 
-		res.json(false);
-	}
+	// 	res.json(false);
+	// }
 
-	else{
-		res.json(characters);
-	}
+	// else{
+	// 	res.json(waiting_list);
+	// }
+
+	res.json(waiting_list, table_data);
 })
-*/
+
 // Create New Characters - takes in JSON input
 /* app.post('/api/new', function(req, res){
 
