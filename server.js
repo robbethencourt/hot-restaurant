@@ -5,11 +5,15 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var table_data = require('./app/data/table-data.js');
 var waiting_list = require('./app/data/waitinglist-data.js');
+var fs = require('fs');
 
 // Sets up the Express App
 // =============================================================
 var app = express();
 var PORT = 3000;
+
+require('/app/routing/html-routes.js')(app);
+require('/app/routing/api-routes.js')(app);
 
 // Sets up the Express app to handle data parsing 
 app.use(bodyParser.json());
@@ -93,19 +97,6 @@ app.get('/data', function(req, res){
 	res.json(waiting_list, table_data);
 })
 
-// Create New Characters - takes in JSON input
-/* app.post('/api/new', function(req, res){
-
-	var newcharacter = req.body;
-	newcharacter.routeName = newcharacter.name.replace(/\s+/g, '').toLowerCase()
-
-	console.log(newcharacter);
-
-	characters.push(newcharacter);
-
-	res.json(newcharacter);
-})
-*/
 // Starts the server to begin listening 
 // =============================================================
 app.listen(PORT, function(){
